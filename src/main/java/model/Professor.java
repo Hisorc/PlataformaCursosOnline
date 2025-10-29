@@ -1,0 +1,78 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package model;
+
+/**
+ *
+ * @author Henri
+ */
+public class Professor extends Usuario {
+    private String cpf;
+    
+    public Professor(){
+        super(); //chama o construtor da classe Pai              
+        this.cpf = "000.000.000-00";    
+    }
+
+    public Professor(String nome, char sexo, int idade, String cpf) {
+        super(nome, sexo, idade);
+        this.cpf = cpf;
+    }
+    
+    @Override
+    public String toString(){        
+        String txt =  
+        "---------- Professor -----------\n";
+        txt += super.toString();
+        txt += "CPF: "+ this.cpf+"\n"
+        +"-------------------------------------\n";    
+        return txt;               
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        Professor outro = (Professor) obj;
+        if(!super.equals(obj))
+            return false;
+        else if(this.cpf.equals(outro.getCpf()))
+            return false;
+        
+        return true;
+    }        
+        
+    public void copiar(Professor outro){
+        this.nome = outro.getNome();
+        this.sexo = outro.getSexo();
+        this.idade = outro.getIdade();
+        this.cpf = outro.getCpf();    
+    }
+    
+    public String cabecalho(){
+        return "Nome;sexo;idade;cpf\n";
+    }
+    
+    public String atributoToCSV(){
+        String aux = this.nome + ";" + this.sexo +";"+this.idade+";"+this.cpf+ "\n";
+        return aux;    
+    }
+    
+    public void CSVToAtributo(String csv){
+        String vetor[] = csv.split(";");
+        
+        this.nome = vetor[0];
+        this.sexo = vetor[1].charAt(0);
+        this.idade = Integer.parseInt(vetor[2]);
+        this.cpf = vetor[3];
+    }
+             
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+}
